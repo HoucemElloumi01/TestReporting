@@ -1,0 +1,830 @@
+{
+  "session": {
+    "header": {
+      "Python version": "3.10.12"
+    },
+    "sections": {
+      "header": {
+        "TESTSET_ID": "null",
+        "NIP_VERSION": "SDV_01_V19.01.04.00F_V21.00.03.00F",
+        "HW_VERSION": "null",
+        "TBAD_VERSION": "SDV_01_V19.01.04.00F_01_V21.00.03.00F__SDV_Primary__07072026__001__default.zip",
+        "SW_VERSION": "null",
+        "CD": "/home/jenkins/audi/workspace/AUDI_CH63_SDV_CthRepo_Manuell",
+        "PD": "/home/jenkins/audi/workspace/AUDI_CH63_SDV_CthRepo_Manuell"
+      },
+      "ecus": {
+        "SDV_Primary": {
+          "================== SDV_Primary ==================": {
+            "Target address": 12467,
+            "Server IP address": "fd53:7cb8:383::b3",
+            "Tester address": 3712,
+            "Tester IP address": "fd53:7cb8:383::73"
+          }
+        }
+      }
+    },
+    "details": {
+      "os": "Linux",
+      "python": "3.10.12",
+      "datetime": "2026-07-07T12:34:05Z",
+      "user": "root",
+      "hostname": "TE06981",
+      "inputs": {
+        "Target_ECUs": [
+          "SDV_Primary"
+        ],
+        "TestSuite": "SDV_IPKOM_SMOKE.xml",
+        "Database": "",
+        "FrameworkConfig": "channel_mapping.yaml",
+        "EcusConfig": "Config/TestBenchConfigs/AUDI_02/config.xml"
+      }
+    },
+    "statistics": {
+      "total": 4,
+      "duration": 412.969535,
+      "successful": 3,
+      "failed": 0,
+      "errored": 1,
+      "skipped": 0
+    }
+  },
+  "testsuite": [
+    {
+      "name": "IPKOM_Smoke_Tests",
+      "children": [
+        {
+          "name": "IPKOM_Stimulation",
+          "status": "PASS",
+          "duration": 55.891662,
+          "children": [
+            {
+              "name": "tca_t_ip_ndp_address_resolution_inbound",
+              "status": "PASS",
+              "duration": 55.891662,
+              "children": [
+                {
+                  "name": "tca_t_ip_ndp_address_resolution_inbound_XMM_ADAS_PRIM_ETH01_ADAS_Prim",
+                  "status": "PASS",
+                  "result": "PASS",
+                  "duration": 55.891662,
+                  "stages": [
+                    {
+                      "name": "setUp",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:37:07.025733+00:00",
+                          "message": "# DTC dump\n\nClick [here](file://Tests/IPKOM_Smoke_Tests/IPKOM_Stimulation/tca_t_ip_ndp_address_resolution_inbound_XMM_ADAS_PRIM_ETH01_ADAS_Prim/beginning_test_case_dtc_dump.txt) to see DTC dump results",
+                          "type": "DATA_RECORD",
+                          "summary": []
+                        },
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:37:07.026086+00:00",
+                          "message": "DTC report for 'SDV_Primary'",
+                          "type": "DATA_RECORD",
+                          "summary": [],
+                          "block_id": 0,
+                          "block_name": "DTC Information Report For 'SDV_Primary': 0 DTC reported",
+                          "table": {
+                            "header": [
+                              "DTC",
+                              "Description",
+                              "Severity",
+                              "Status"
+                            ],
+                            "rows": [],
+                            "meta": {}
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "name": "test_execute",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "[TEST STEP 1]",
+                          "status": "PASS",
+                          "duration": 0.000123,
+                          "timestamp": "2026-07-07T12:37:07.058530+00:00",
+                          "message": "The test system sends Neighbor Solicitation messages to the DUT from all its communication partners which are defined in the database (the messages are sent with a matching VLAN ID to that of the DUT).",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "expectTrue",
+                          "status": "PASS",
+                          "duration": 0.000172,
+                          "timestamp": "2026-07-07T12:37:08.300339+00:00",
+                          "message": "After a time period of 1 (s), at least one Neighbor Advertisement will be received by the test system from the DUT for every Neighbor Solicitation which was sent to it. ",
+                          "type": "EXPECT",
+                          "summary": [],
+                          "result": "PASS",
+                          "severity": "MAJOR",
+                          "actual_result": "1 Neighbor Advertisement observed. Observed: ['fd53:7cb8:383::73']. Missing: []",
+                          "expected_result": "1 Neighbor Advertisement observed. Observed: ['fd53:7cb8:383::73']"
+                        },
+                        {
+                          "name": "[TEST STEP 2]",
+                          "status": "PASS",
+                          "duration": 0.000102,
+                          "timestamp": "2026-07-07T12:37:08.301510+00:00",
+                          "message": "The test system sends ICMPv6 Echo Request messages without any data to the DUT by using the MAC-IP address             combination which was received by the test system from the DUT.",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "assertTrue",
+                          "status": "PASS",
+                          "duration": 0.000188,
+                          "timestamp": "2026-07-07T12:37:08.782312+00:00",
+                          "message": "After a time period of 1(s), an ICMPv6 Echo Response message with the correct IP source address (as per the DFL) will be received             by the test system for every ICMPv6 Echo Request message which was sent to the DUT. ",
+                          "type": "ASSERT",
+                          "summary": [],
+                          "result": "PASS",
+                          "severity": "MAJOR",
+                          "actual_result": "1 Echo Replies Observed. Observed: ['fd53:7cb8:383::73']. Missing: []",
+                          "expected_result": "1 Echo Replies Observed. Observed: ['fd53:7cb8:383::73']"
+                        },
+                        {
+                          "name": "assertTrue",
+                          "status": "PASS",
+                          "duration": 9.2e-05,
+                          "timestamp": "2026-07-07T12:37:08.783343+00:00",
+                          "message": "ICMPv6 Echo Response was sent from an IPv6 source address which does not match the definition in the DFL. ",
+                          "type": "ASSERT",
+                          "summary": [],
+                          "result": "PASS",
+                          "severity": "MAJOR",
+                          "actual_result": "0 IPs outside of DFL",
+                          "expected_result": "0 IPs outside of DFL"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "tearDown",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:37:32.979173+00:00",
+                          "message": "# DTC dump\n\nClick [here](file://Tests/IPKOM_Smoke_Tests/IPKOM_Stimulation/tca_t_ip_ndp_address_resolution_inbound_XMM_ADAS_PRIM_ETH01_ADAS_Prim/end_of_test_case_dtc_dump.txt) to see DTC dump results",
+                          "type": "DATA_RECORD",
+                          "summary": []
+                        },
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:37:32.979497+00:00",
+                          "message": "DTC report for 'SDV_Primary'",
+                          "type": "DATA_RECORD",
+                          "summary": [],
+                          "block_id": 1,
+                          "block_name": "DTC Information Report For 'SDV_Primary': 0 DTC reported",
+                          "table": {
+                            "header": [
+                              "DTC",
+                              "Description",
+                              "Severity",
+                              "Status"
+                            ],
+                            "rows": [],
+                            "meta": {}
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "summary": [
+                    "tca_t_ip_ndp_address_resolution_inbound_XMM_ADAS_PRIM_ETH01_ADAS_Prim passes"
+                  ],
+                  "details": "",
+                  "metadata": {
+                    "tc_id": "T_IP_NDP_Address_Resolution_Inbound",
+                    "status": "Ready",
+                    "description": "The DUT must answer Neighbor Solications with the correct Neighbor Advertisements, when the used IP address and VLAN ID                 correspond to a communication relationship of a DUT interface, which is defined in the DFL. Additionally, the DUT must                 respond to the ICMPv6 Echo Requests with ICMPv6 Echo Responses on the received MAC-IP address pairs.",
+                    "authors": [
+                      "forellana"
+                    ],
+                    "review_status": "Reviewed",
+                    "reviewer": "iestevez",
+                    "requirement": [
+                      "IP_146",
+                      "IP_82"
+                    ],
+                    "domain": "IPCom",
+                    "testbench_types": [
+                      "S",
+                      "M"
+                    ],
+                    "test_type": [
+                      "Requirements-based test"
+                    ],
+                    "cb_testcase_id": "25624025",
+                    "cb_testspec_id": "4761504",
+                    "severity": "MAJOR",
+                    "technica_jira_testcase_ids": "CTH-4646"
+                  },
+                  "parameters": {
+                    "__custom_name__": "XMM_ADAS_PRIM_ETH01_ADAS_Prim",
+                    "partition_port": "ADAS_Prim_CPUPort1",
+                    "target_partition": "ADAS_Prim",
+                    "dut_ip": "fd53:7cb8:383::b3",
+                    "dut_mac": "['02:7d:fa:00:b3:00']",
+                    "vlan_id": "2",
+                    "outer_vlan": "None",
+                    "gw_ip": "fd53:7cb8:0383:0000:0000:0000:0000:0171",
+                    "dut_port": "ADAS_Prim_CPUPort1",
+                    "wireshark_filter": "data.data == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or uds or tcp.payload == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or udp.payload ==74:65:63:68:6e:69:63:61:5f:74:65:73:74 or udp.length == 1 or  tcp.options == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or ipv6.plen == 1",
+                    "com_partners": "['fd53:7cb8:383::73']",
+                    "unicast_partners": "['fd53:7cb8:383::73']",
+                    "channel_name": "XMM_ADAS_PRIM_ETH01",
+                    "real_channel_name": "XMM_ADAS_Prim_ETH01",
+                    "startuptime": "60.0",
+                    "shutdowntime": "35.0",
+                    "switch_type": "Das DUT hat einen internen Switch und der Switch selbst ist gPTP Slave am Host Prozessor oder einem weiteren Switch",
+                    "dtc_mac_address_konflict": "False",
+                    "t_TCP_NACK_CLOSE_MIN": "None",
+                    "t_TCP_NACK_CLOSE_MAX": "10",
+                    "relevant": "True",
+                    "skiping_reason": "",
+                    "qlah_versions": "['v1.6']",
+                    "physical_adapter": "ETH_TimeSync",
+                    "port_info": "{'XMM': {'src_mac': ['02:7d:fa:01:73:00'], 'vlan_id': 2, 'outer_vlan': None, 'ip_adress': 'fd53:7cb8:383::73'}, 'ADAS_basic': {'src_mac': ['02:7d:fa:01:71:00'], 'vlan_id': 21, 'outer_vlan': None, 'ip_adress': 'fd53:7cb8:383:15::171'}, 'SRR_SiLe': {'src_mac': ['02:7d:fa:00:bf:00'], 'vlan_id': 21, 'outer_vlan': 773, 'ip_adress': 'fd53:7cb8:383:15::bf'}, 'SRR_SiRi': {'src_mac': ['02:7d:fa:00:c0:00'], 'vlan_id': 21, 'outer_vlan': 774, 'ip_adress': 'fd53:7cb8:383:15::c0'}, 'MRR_ReLe': {'src_mac': ['02:7d:fa:00:01:8d'], 'vlan_id': 21, 'outer_vlan': 771, 'ip_adress': 'fd53:7cb8:383:15::18d'}, 'MRR_ReRi': {'src_mac': ['02:7d:fa:00:01:8e'], 'vlan_id': 21, 'outer_vlan': 772, 'ip_adress': 'fd53:7cb8:383:15::18e'}, 'TestSysIP': {'src_mac': ['02:7d:fa:03:aa:00'], 'vlan_id': 21, 'outer_vlan': None, 'ip_adress': 'fd53:7cb8:383:15::3aa'}}"
+                  },
+                  "children": []
+                }
+              ],
+              "execution_mapping_ids": [
+                6
+              ]
+            }
+          ]
+        },
+        {
+          "name": "IPKOM_Observation",
+          "status": "ERROR",
+          "duration": 357.077873,
+          "children": [
+            {
+              "name": "tca_t_ip_flow_label_according_the_datadefinition",
+              "status": "PASS",
+              "duration": 97.111022,
+              "children": [
+                {
+                  "name": "tca_t_ip_flow_label_according_the_datadefinition_XMM_ADAS_PRIM_ETH01_ADAS_Prim",
+                  "status": "PASS",
+                  "result": "PASS",
+                  "duration": 97.111022,
+                  "stages": [
+                    {
+                      "name": "setUp",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:38:30.431901+00:00",
+                          "message": "# DTC dump\n\nClick [here](file://Tests/IPKOM_Smoke_Tests/IPKOM_Observation/tca_t_ip_flow_label_according_the_datadefinition_XMM_ADAS_PRIM_ETH01_ADAS_Prim/beginning_test_case_dtc_dump.txt) to see DTC dump results",
+                          "type": "DATA_RECORD",
+                          "summary": []
+                        },
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:38:30.432309+00:00",
+                          "message": "DTC report for 'SDV_Primary'",
+                          "type": "DATA_RECORD",
+                          "summary": [],
+                          "block_id": 2,
+                          "block_name": "DTC Information Report For 'SDV_Primary': 0 DTC reported",
+                          "table": {
+                            "header": [
+                              "DTC",
+                              "Description",
+                              "Severity",
+                              "Status"
+                            ],
+                            "rows": [],
+                            "meta": {}
+                          }
+                        },
+                        {
+                          "name": "[PRE1]",
+                          "status": "PASS",
+                          "duration": 7.3e-05,
+                          "timestamp": "2026-07-07T12:38:30.433017+00:00",
+                          "message": "The DUT is ready to communicate.",
+                          "type": "STEP",
+                          "summary": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "test_execute",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "[TEST STEP 1]",
+                          "status": "PASS",
+                          "duration": 0.00015,
+                          "timestamp": "2026-07-07T12:38:30.434208+00:00",
+                          "message": "The communication of the DUT is observed for a time period of 30 s.",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "assertTrue",
+                          "status": "PASS",
+                          "duration": 0.000138,
+                          "timestamp": "2026-07-07T12:39:00.690014+00:00",
+                          "message": "The field Flow-label in the IPv6 header is filled according to the DFL. The field Flow-label must contain a value 0, \n            when no value is defined in the DFL. ",
+                          "type": "ASSERT",
+                          "summary": [],
+                          "result": "PASS",
+                          "severity": "MAJOR",
+                          "actual_result": "0 messages have invalid Flow-label",
+                          "expected_result": "0 messages have invalid Flow-label"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "tearDown",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:39:37.825739+00:00",
+                          "message": "# DTC dump\n\nClick [here](file://Tests/IPKOM_Smoke_Tests/IPKOM_Observation/tca_t_ip_flow_label_according_the_datadefinition_XMM_ADAS_PRIM_ETH01_ADAS_Prim/end_of_test_case_dtc_dump.txt) to see DTC dump results",
+                          "type": "DATA_RECORD",
+                          "summary": []
+                        },
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:39:37.826101+00:00",
+                          "message": "DTC report for 'SDV_Primary'",
+                          "type": "DATA_RECORD",
+                          "summary": [],
+                          "block_id": 3,
+                          "block_name": "DTC Information Report For 'SDV_Primary': 0 DTC reported",
+                          "table": {
+                            "header": [
+                              "DTC",
+                              "Description",
+                              "Severity",
+                              "Status"
+                            ],
+                            "rows": [],
+                            "meta": {}
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "summary": [
+                    "tca_t_ip_flow_label_according_the_datadefinition_XMM_ADAS_PRIM_ETH01_ADAS_Prim passes"
+                  ],
+                  "details": "",
+                  "metadata": {
+                    "tc_id": "T_IP_Flow_Label_according_the_Datadefinition",
+                    "status": "Ready",
+                    "description": "This test case checks if the Flow-Label field in the IPv6 header is filled correctly according to the database.",
+                    "authors": [
+                      "forellana"
+                    ],
+                    "review_status": "Reviewed",
+                    "reviewer": "iestevez",
+                    "requirement": [
+                      "IP_165",
+                      "IP_136"
+                    ],
+                    "domain": "IPCom",
+                    "testbench_types": [
+                      "S",
+                      "M"
+                    ],
+                    "test_type": [
+                      "Requirements-based test"
+                    ],
+                    "cb_testcase_id": "25624061",
+                    "cb_testspec_id": "4800410",
+                    "severity": "MINOR",
+                    "technica_jira_testcase_ids": "CTH-4574"
+                  },
+                  "parameters": {
+                    "__custom_name__": "XMM_ADAS_PRIM_ETH01_ADAS_Prim",
+                    "partition_port": "ADAS_Prim_CPUPort1",
+                    "target_partition": "ADAS_Prim",
+                    "dut_ip": "fd53:7cb8:383::b3",
+                    "dut_mac": "['02:7d:fa:00:b3:00']",
+                    "vlan_id": "2",
+                    "outer_vlan": "None",
+                    "gw_ip": "fd53:7cb8:0383:0000:0000:0000:0000:0171",
+                    "dut_port": "ADAS_Prim_CPUPort1",
+                    "wireshark_filter": "data.data == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or uds or tcp.payload == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or udp.payload ==74:65:63:68:6e:69:63:61:5f:74:65:73:74 or udp.length == 1 or  tcp.options == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or ipv6.plen == 1",
+                    "com_partners": "['fd53:7cb8:383::73']",
+                    "unicast_partners": "['fd53:7cb8:383::73']",
+                    "channel_name": "XMM_ADAS_PRIM_ETH01",
+                    "real_channel_name": "XMM_ADAS_Prim_ETH01",
+                    "startuptime": "60.0",
+                    "shutdowntime": "35.0",
+                    "switch_type": "Das DUT hat einen internen Switch und der Switch selbst ist gPTP Slave am Host Prozessor oder einem weiteren Switch",
+                    "dtc_mac_address_konflict": "False",
+                    "t_TCP_NACK_CLOSE_MIN": "None",
+                    "t_TCP_NACK_CLOSE_MAX": "10",
+                    "relevant": "True",
+                    "skiping_reason": "",
+                    "qlah_versions": "['v1.6']",
+                    "physical_adapter": "ETH_TimeSync",
+                    "port_info": "{'XMM': {'src_mac': ['02:7d:fa:01:73:00'], 'vlan_id': 2, 'outer_vlan': None, 'ip_adress': 'fd53:7cb8:383::73'}, 'ADAS_basic': {'src_mac': ['02:7d:fa:01:71:00'], 'vlan_id': 21, 'outer_vlan': None, 'ip_adress': 'fd53:7cb8:383:15::171'}, 'SRR_SiLe': {'src_mac': ['02:7d:fa:00:bf:00'], 'vlan_id': 21, 'outer_vlan': 773, 'ip_adress': 'fd53:7cb8:383:15::bf'}, 'SRR_SiRi': {'src_mac': ['02:7d:fa:00:c0:00'], 'vlan_id': 21, 'outer_vlan': 774, 'ip_adress': 'fd53:7cb8:383:15::c0'}, 'MRR_ReLe': {'src_mac': ['02:7d:fa:00:01:8d'], 'vlan_id': 21, 'outer_vlan': 771, 'ip_adress': 'fd53:7cb8:383:15::18d'}, 'MRR_ReRi': {'src_mac': ['02:7d:fa:00:01:8e'], 'vlan_id': 21, 'outer_vlan': 772, 'ip_adress': 'fd53:7cb8:383:15::18e'}, 'TestSysIP': {'src_mac': ['02:7d:fa:03:aa:00'], 'vlan_id': 21, 'outer_vlan': None, 'ip_adress': 'fd53:7cb8:383:15::3aa'}}"
+                  },
+                  "children": []
+                }
+              ],
+              "execution_mapping_ids": [
+                7
+              ]
+            },
+            {
+              "name": "tca_t_ip_vlan_reception_validation_v2",
+              "status": "ERROR",
+              "duration": 130.944657,
+              "children": [
+                {
+                  "name": "tca_t_ip_vlan_reception_validation_v2_XMM_ADAS_PRIM_ETH01_ADAS_Prim",
+                  "status": "ERROR",
+                  "result": "ERROR",
+                  "duration": 130.944657,
+                  "stages": [
+                    {
+                      "name": "setUp",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:40:14.178515+00:00",
+                          "message": "# DTC dump\n\nClick [here](file://Tests/IPKOM_Smoke_Tests/IPKOM_Observation/tca_t_ip_vlan_reception_validation_v2_XMM_ADAS_PRIM_ETH01_ADAS_Prim/beginning_test_case_dtc_dump.txt) to see DTC dump results",
+                          "type": "DATA_RECORD",
+                          "summary": []
+                        },
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:40:14.178842+00:00",
+                          "message": "DTC report for 'SDV_Primary'",
+                          "type": "DATA_RECORD",
+                          "summary": [],
+                          "block_id": 4,
+                          "block_name": "DTC Information Report For 'SDV_Primary': 0 DTC reported",
+                          "table": {
+                            "header": [
+                              "DTC",
+                              "Description",
+                              "Severity",
+                              "Status"
+                            ],
+                            "rows": [],
+                            "meta": {}
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "name": "test_execute",
+                      "status": "ERROR",
+                      "stages": [
+                        {
+                          "name": "[TEST STEP 1]",
+                          "status": "PASS",
+                          "duration": 0.000143,
+                          "timestamp": "2026-07-07T12:41:24.216095+00:00",
+                          "message": " Verification: The test system sends an ICMPv6 echo request to the DUT from each communication partner IP Address which is mapped to a VLAN according to DFL while using the VLAN-related IEEE802.1Q VLAN tags.",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "expectTrue",
+                          "status": "PASS",
+                          "duration": 0.000168,
+                          "timestamp": "2026-07-07T12:41:24.667022+00:00",
+                          "message": "Within 100ms, an Echo Response message must be received for each Echo Request. ",
+                          "type": "EXPECT",
+                          "summary": [],
+                          "result": "PASS",
+                          "severity": "MAJOR",
+                          "actual_result": "1 Echo response received. Missing Echo response: [].",
+                          "expected_result": "1 Echo response received. Missing Echo response: []."
+                        }
+                      ]
+                    },
+                    {
+                      "name": "tearDown",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:41:48.865304+00:00",
+                          "message": "# DTC dump\n\nClick [here](file://Tests/IPKOM_Smoke_Tests/IPKOM_Observation/tca_t_ip_vlan_reception_validation_v2_XMM_ADAS_PRIM_ETH01_ADAS_Prim/end_of_test_case_dtc_dump.txt) to see DTC dump results",
+                          "type": "DATA_RECORD",
+                          "summary": []
+                        },
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:41:48.865649+00:00",
+                          "message": "DTC report for 'SDV_Primary'",
+                          "type": "DATA_RECORD",
+                          "summary": [],
+                          "block_id": 5,
+                          "block_name": "DTC Information Report For 'SDV_Primary': 0 DTC reported",
+                          "table": {
+                            "header": [
+                              "DTC",
+                              "Description",
+                              "Severity",
+                              "Status"
+                            ],
+                            "rows": [],
+                            "meta": {}
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "summary": [
+                    "tca_t_ip_vlan_reception_validation_v2_XMM_ADAS_PRIM_ETH01_ADAS_Prim errors",
+                    "AttributeError: 'NoneType' object has no attribute 'vlan'\nFile \"/usr/local/lib/python3.10/dist-packages/technica/te_libraries/ltwoplus_utils_cariad/utils_check.py\", line 364, in check_vlan_ip_echo_response observed_vlan = packet[0][\"QVlan_l\"].vlan AttributeError: 'NoneType' object has no attribute 'vlan'"
+                  ],
+                  "details": "Error in test_execute",
+                  "metadata": {
+                    "tc_id": "T_IP_VLAN_Reception_Validation_v2",
+                    "status": "Ready",
+                    "description": "To ensure that all VLANs are functional according to the DFL and IEEE802.1Q VLANs, the test system sends an ICMPv6 echo request to each communication relationship of the DUT with a correct VLAN tag                 according to the DFL and IEEE802.1Q definition. The subsequent echo responses must also meet the criteria of the DFL and IEEE802.1Q standards. The test case is structured as follows: 1) Verification of                 communication relationships that are assigned to a VLAN (correct VLAN ID is used). 2) Falsification of communication relationships associated with a VLAN (incorrect VLAN ID is used). 3) Falsification of                 communication relationships associated with a VLAN (no VLAN tag is used).",
+                    "authors": [
+                      "forellana"
+                    ],
+                    "review_status": "Reviewed",
+                    "reviewer": "iestevez",
+                    "requirement": [
+                      "IP_177"
+                    ],
+                    "domain": "IPCom",
+                    "testbench_types": [
+                      "S"
+                    ],
+                    "test_type": [
+                      "Requirements-based test"
+                    ],
+                    "cb_testcase_id": "25624055",
+                    "cb_testspec_id": "7746378",
+                    "severity": "MAJOR",
+                    "technica_jira_testcase_ids": "CTH-4579"
+                  },
+                  "parameters": {
+                    "__custom_name__": "XMM_ADAS_PRIM_ETH01_ADAS_Prim",
+                    "partition_port": "ADAS_Prim_CPUPort1",
+                    "target_partition": "ADAS_Prim",
+                    "dut_ip": "fd53:7cb8:383::b3",
+                    "dut_mac": "['02:7d:fa:00:b3:00']",
+                    "vlan_id": "2",
+                    "outer_vlan": "None",
+                    "gw_ip": "fd53:7cb8:0383:0000:0000:0000:0000:0171",
+                    "dut_port": "ADAS_Prim_CPUPort1",
+                    "wireshark_filter": "data.data == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or uds or tcp.payload == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or udp.payload ==74:65:63:68:6e:69:63:61:5f:74:65:73:74 or udp.length == 1 or  tcp.options == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or ipv6.plen == 1",
+                    "com_partners": "['fd53:7cb8:383::73']",
+                    "unicast_partners": "['fd53:7cb8:383::73']",
+                    "channel_name": "XMM_ADAS_PRIM_ETH01",
+                    "real_channel_name": "XMM_ADAS_Prim_ETH01",
+                    "startuptime": "60.0",
+                    "shutdowntime": "35.0",
+                    "switch_type": "Das DUT hat einen internen Switch und der Switch selbst ist gPTP Slave am Host Prozessor oder einem weiteren Switch",
+                    "dtc_mac_address_konflict": "False",
+                    "t_TCP_NACK_CLOSE_MIN": "None",
+                    "t_TCP_NACK_CLOSE_MAX": "10",
+                    "relevant": "True",
+                    "skiping_reason": "",
+                    "qlah_versions": "['v1.6']",
+                    "physical_adapter": "ETH_TimeSync",
+                    "port_info": "{'XMM': {'src_mac': ['02:7d:fa:01:73:00'], 'vlan_id': 2, 'outer_vlan': None, 'ip_adress': 'fd53:7cb8:383::73'}, 'ADAS_basic': {'src_mac': ['02:7d:fa:01:71:00'], 'vlan_id': 21, 'outer_vlan': None, 'ip_adress': 'fd53:7cb8:383:15::171'}, 'SRR_SiLe': {'src_mac': ['02:7d:fa:00:bf:00'], 'vlan_id': 21, 'outer_vlan': 773, 'ip_adress': 'fd53:7cb8:383:15::bf'}, 'SRR_SiRi': {'src_mac': ['02:7d:fa:00:c0:00'], 'vlan_id': 21, 'outer_vlan': 774, 'ip_adress': 'fd53:7cb8:383:15::c0'}, 'MRR_ReLe': {'src_mac': ['02:7d:fa:00:01:8d'], 'vlan_id': 21, 'outer_vlan': 771, 'ip_adress': 'fd53:7cb8:383:15::18d'}, 'MRR_ReRi': {'src_mac': ['02:7d:fa:00:01:8e'], 'vlan_id': 21, 'outer_vlan': 772, 'ip_adress': 'fd53:7cb8:383:15::18e'}, 'TestSysIP': {'src_mac': ['02:7d:fa:03:aa:00'], 'vlan_id': 21, 'outer_vlan': None, 'ip_adress': 'fd53:7cb8:383:15::3aa'}}"
+                  },
+                  "children": []
+                }
+              ],
+              "execution_mapping_ids": [
+                8
+              ]
+            },
+            {
+              "name": "tca_t_ip_ipv6_extension_header_validation",
+              "status": "PASS",
+              "duration": 129.022194,
+              "children": [
+                {
+                  "name": "tca_t_ip_ipv6_extension_header_validation_XMM_ADAS_PRIM_ETH01_ADAS_Prim",
+                  "status": "PASS",
+                  "result": "PASS",
+                  "duration": 129.022194,
+                  "stages": [
+                    {
+                      "name": "setUp",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:42:18.681274+00:00",
+                          "message": "# DTC dump\n\nClick [here](file://Tests/IPKOM_Smoke_Tests/IPKOM_Observation/tca_t_ip_ipv6_extension_header_validation_XMM_ADAS_PRIM_ETH01_ADAS_Prim/beginning_test_case_dtc_dump.txt) to see DTC dump results",
+                          "type": "DATA_RECORD",
+                          "summary": []
+                        },
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:42:18.681722+00:00",
+                          "message": "DTC report for 'SDV_Primary'",
+                          "type": "DATA_RECORD",
+                          "summary": [],
+                          "block_id": 6,
+                          "block_name": "DTC Information Report For 'SDV_Primary': 0 DTC reported",
+                          "table": {
+                            "header": [
+                              "DTC",
+                              "Description",
+                              "Severity",
+                              "Status"
+                            ],
+                            "rows": [],
+                            "meta": {}
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "name": "test_execute",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "[TEST STEP 1]",
+                          "status": "PASS",
+                          "duration": 0.00015,
+                          "timestamp": "2026-07-07T12:43:28.789861+00:00",
+                          "message": "The tester logs during 30s all traffic generated by \n            the DUT and stores the IPv6 messages for further analysis.",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[TEST STEP 2]",
+                          "status": "PASS",
+                          "duration": 6.3e-05,
+                          "timestamp": "2026-07-07T12:43:28.790950+00:00",
+                          "message": "Every received IPv6 Frame is checked for a valid next header.",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "assertFalse",
+                          "status": "PASS",
+                          "duration": 0.000217,
+                          "timestamp": "2026-07-07T12:43:28.791558+00:00",
+                          "message": "All received frames have a valid next header. ",
+                          "type": "ASSERT",
+                          "summary": [],
+                          "result": "PASS",
+                          "severity": "MAJOR",
+                          "actual_result": "0 IPv6 messages were sent with invalid next header. []",
+                          "expected_result": "0 IPv6 messages were sent with invalid next header."
+                        }
+                      ]
+                    },
+                    {
+                      "name": "tearDown",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:43:57.985204+00:00",
+                          "message": "# DTC dump\n\nClick [here](file://Tests/IPKOM_Smoke_Tests/IPKOM_Observation/tca_t_ip_ipv6_extension_header_validation_XMM_ADAS_PRIM_ETH01_ADAS_Prim/end_of_test_case_dtc_dump.txt) to see DTC dump results",
+                          "type": "DATA_RECORD",
+                          "summary": []
+                        },
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T12:43:57.985522+00:00",
+                          "message": "DTC report for 'SDV_Primary'",
+                          "type": "DATA_RECORD",
+                          "summary": [],
+                          "block_id": 7,
+                          "block_name": "DTC Information Report For 'SDV_Primary': 0 DTC reported",
+                          "table": {
+                            "header": [
+                              "DTC",
+                              "Description",
+                              "Severity",
+                              "Status"
+                            ],
+                            "rows": [],
+                            "meta": {}
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "summary": [
+                    "tca_t_ip_ipv6_extension_header_validation_XMM_ADAS_PRIM_ETH01_ADAS_Prim passes"
+                  ],
+                  "details": "",
+                  "metadata": {
+                    "tc_id": "T_IP_IPv6_Extension_Header_Validation",
+                    "status": "Implemented",
+                    "description": "This test case verifies if IPv6 extension headers are used when sending IPv6 packets",
+                    "authors": [
+                      "forellana"
+                    ],
+                    "review_status": "Reviewed",
+                    "reviewer": "iestevez",
+                    "requirement": [
+                      "IP_138",
+                      "IP_976",
+                      "IP_1019"
+                    ],
+                    "domain": "IPCom",
+                    "testbench_types": [
+                      "S",
+                      "M"
+                    ],
+                    "test_type": [
+                      "Requirements-based test"
+                    ],
+                    "cb_testcase_id": "25624046",
+                    "cb_testspec_id": "4800405",
+                    "severity": "MINOR",
+                    "technica_jira_testcase_ids": "CTH-4635"
+                  },
+                  "parameters": {
+                    "__custom_name__": "XMM_ADAS_PRIM_ETH01_ADAS_Prim",
+                    "partition_port": "ADAS_Prim_CPUPort1",
+                    "target_partition": "ADAS_Prim",
+                    "dut_ip": "fd53:7cb8:383::b3",
+                    "dut_mac": "['02:7d:fa:00:b3:00']",
+                    "vlan_id": "2",
+                    "outer_vlan": "None",
+                    "gw_ip": "fd53:7cb8:0383:0000:0000:0000:0000:0171",
+                    "dut_port": "ADAS_Prim_CPUPort1",
+                    "wireshark_filter": "data.data == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or uds or tcp.payload == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or udp.payload ==74:65:63:68:6e:69:63:61:5f:74:65:73:74 or udp.length == 1 or  tcp.options == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or ipv6.plen == 1",
+                    "com_partners": "['fd53:7cb8:383::73']",
+                    "unicast_partners": "['fd53:7cb8:383::73']",
+                    "channel_name": "XMM_ADAS_PRIM_ETH01",
+                    "real_channel_name": "XMM_ADAS_Prim_ETH01",
+                    "startuptime": "60.0",
+                    "shutdowntime": "35.0",
+                    "switch_type": "Das DUT hat einen internen Switch und der Switch selbst ist gPTP Slave am Host Prozessor oder einem weiteren Switch",
+                    "dtc_mac_address_konflict": "False",
+                    "t_TCP_NACK_CLOSE_MIN": "None",
+                    "t_TCP_NACK_CLOSE_MAX": "10",
+                    "relevant": "True",
+                    "skiping_reason": "",
+                    "qlah_versions": "['v1.6']",
+                    "physical_adapter": "ETH_TimeSync",
+                    "port_info": "{'XMM': {'src_mac': ['02:7d:fa:01:73:00'], 'vlan_id': 2, 'outer_vlan': None, 'ip_adress': 'fd53:7cb8:383::73'}, 'ADAS_basic': {'src_mac': ['02:7d:fa:01:71:00'], 'vlan_id': 21, 'outer_vlan': None, 'ip_adress': 'fd53:7cb8:383:15::171'}, 'SRR_SiLe': {'src_mac': ['02:7d:fa:00:bf:00'], 'vlan_id': 21, 'outer_vlan': 773, 'ip_adress': 'fd53:7cb8:383:15::bf'}, 'SRR_SiRi': {'src_mac': ['02:7d:fa:00:c0:00'], 'vlan_id': 21, 'outer_vlan': 774, 'ip_adress': 'fd53:7cb8:383:15::c0'}, 'MRR_ReLe': {'src_mac': ['02:7d:fa:00:01:8d'], 'vlan_id': 21, 'outer_vlan': 771, 'ip_adress': 'fd53:7cb8:383:15::18d'}, 'MRR_ReRi': {'src_mac': ['02:7d:fa:00:01:8e'], 'vlan_id': 21, 'outer_vlan': 772, 'ip_adress': 'fd53:7cb8:383:15::18e'}, 'TestSysIP': {'src_mac': ['02:7d:fa:03:aa:00'], 'vlan_id': 21, 'outer_vlan': None, 'ip_adress': 'fd53:7cb8:383:15::3aa'}}"
+                  },
+                  "children": []
+                }
+              ],
+              "execution_mapping_ids": [
+                9
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
