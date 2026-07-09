@@ -47,9 +47,10 @@ import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
 import SearchIcon from '@mui/icons-material/Search';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 const drawerWidth = 340;
+const API_BASE = 'http://127.0.0.1:8000/api/reports';
 
 const analysisStatuses = [
   'Not Started',
@@ -142,24 +143,6 @@ const theme = createTheme({
   },
 });
 
-function normalizeStatus(status) {
-  const normalized = String(status || '').trim().toUpperCase();
-
-  if (['PASS', 'PASSED', 'SUCCESS', 'SUCCESSFUL'].includes(normalized)) {
-    return 'Passed';
-  }
-
-  if (['FAIL', 'FAILED', 'ERROR', 'ERRORED'].includes(normalized)) {
-    return 'Failed';
-  }
-
-  if (['SKIP', 'SKIPPED'].includes(normalized)) {
-    return 'Skipped';
-  }
-
-  return 'Not Executed';
-}
-
 function statusStyles(status) {
   const styles = {
     Passed: { color: '#027a48', backgroundColor: '#ecfdf3', borderColor: '#abefc6' },
@@ -171,92 +154,15 @@ function statusStyles(status) {
   return styles[status] || styles['Not Executed'];
 }
 
-function collectTestCases(node, cases = []) {
-  if (!node || typeof node !== 'object') {
-    return cases;
+async function fetchJson(url, options) {
+  const response = await fetch(url, options);
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.error || `Request failed with status ${response.status}`);
   }
 
-  if (node.metadata?.cb_testcase_id || node.parameters || node.stages) {
-    cases.push(node);
-  }
-
-  if (Array.isArray(node.children)) {
-    node.children.forEach((child) => collectTestCases(child, cases));
-  }
-
-  return cases;
-}
-
-function flattenStages(stages = [], groupName = '') {
-  return stages.flatMap((stage) => {
-    const currentGroup = groupName ? `${groupName} / ${stage.name || 'Stage'}` : stage.name || 'Stage';
-    const nested = Array.isArray(stage.stages) ? flattenStages(stage.stages, currentGroup) : [];
-
-    if (stage.type || stage.message || stage.expected_result || stage.actual_result) {
-      return [
-        {
-          id: `${currentGroup}-${stage.timestamp || stage.name || Math.random()}`,
-          group: groupName || 'Execution',
-          name: stage.name || currentGroup,
-          status: normalizeStatus(stage.result || stage.status),
-          message: stage.message || '',
-          expectedResult: stage.expected_result || '',
-          actualResult: stage.actual_result || '',
-          type: stage.type || 'STAGE',
-        },
-        ...nested,
-      ];
-    }
-
-    return nested;
-  });
-}
-
-function compactParameters(parameters = {}) {
-  const entries = Object.entries(parameters).filter(([, value]) => value !== undefined && value !== null && value !== '');
-  const priorityKeys = ['__custom_name__', 'target_partition', 'partition_port', 'dut_ip', 'vlan_id', 'channel_name'];
-  const sortedEntries = [
-    ...priorityKeys.filter((key) => key in parameters).map((key) => [key, parameters[key]]),
-    ...entries.filter(([key]) => !priorityKeys.includes(key)).slice(0, 4),
-  ];
-
-  return sortedEntries.map(([key, value]) => `${key}: ${String(value)}`).join('\n');
-}
-
-function parseReportPayload(payload, sourceFilename) {
-  const rootSuites = Array.isArray(payload?.testsuite) ? payload.testsuite : [];
-  const testCases = rootSuites.flatMap((suite) => collectTestCases(suite));
-
-  return testCases.map((testCase, index) => {
-    const steps = flattenStages(testCase.stages || []);
-    const summaryMessage = Array.isArray(testCase.summary) ? testCase.summary.join('\n') : '';
-    const firstFailingStep = steps.find((step) => step.status === 'Failed');
-    const firstStep = steps.find((step) => step.type === 'STEP') || steps[0];
-
-    return {
-      id: `${sourceFilename}-${testCase.metadata?.cb_testcase_id || testCase.name || index}-${index}`,
-      sourceFilename,
-      testcaseId: testCase.metadata?.cb_testcase_id || testCase.metadata?.tc_id || 'N/A',
-      testcaseName: testCase.name || testCase.metadata?.tc_id || 'Unnamed testcase',
-      parameters: compactParameters(testCase.parameters),
-      parametersRaw: testCase.parameters || {},
-      status: normalizeStatus(testCase.result || testCase.status),
-      description: testCase.metadata?.description || testCase.details || summaryMessage || firstFailingStep?.message || '',
-      message: testCase.details || summaryMessage || firstFailingStep?.message || '',
-      testStepDescription: firstStep?.message || '',
-      testStepStatus: firstStep?.status || 'Not Executed',
-      expectedResult: firstFailingStep?.expectedResult || steps.find((step) => step.expectedResult)?.expectedResult || '',
-      actualResult: firstFailingStep?.actualResult || steps.find((step) => step.actualResult)?.actualResult || '',
-      steps,
-      testerConclusion: '',
-      analysisStatus: 'Not Started',
-    };
-  });
-}
-
-async function readJsonFile(file) {
-  const content = await file.text();
-  return parseReportPayload(JSON.parse(content), file.name);
+  return data;
 }
 
 function compareValues(leftValue, rightValue, direction) {
@@ -453,6 +359,17 @@ export default function App() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [assistantOpen, setAssistantOpen] = useState(true);
   const [loadError, setLoadError] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchJson(`${API_BASE}/testcases/`)
+      .then((data) => {
+        setRows(data.rows || []);
+        setLoadedFiles((data.loadedFiles || []).map((name) => ({ name })));
+      })
+      .catch((error) => setLoadError(error.message))
+      .finally(() => setIsLoading(false));
+  }, []);
 
   const summary = useMemo(
     () => ({
@@ -484,7 +401,14 @@ export default function App() {
   const paginatedRows = visibleRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   const updateRow = (id, patch) => {
+    // Update the UI immediately, then persist to the backend so the conclusion is not lost on reload.
     setRows((currentRows) => currentRows.map((row) => (row.id === id ? { ...row, ...patch } : row)));
+
+    fetchJson(`${API_BASE}/testcases/${id}/`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(patch),
+    }).catch((error) => setLoadError(`Could not save your changes: ${error.message}`));
   };
 
   const handleSort = (columnId) => {
@@ -504,19 +428,14 @@ export default function App() {
       return;
     }
 
-    try {
-      const parsedResults = await Promise.all(files.map(readJsonFile));
-      const mergedRows = parsedResults.flat();
+    const formData = new FormData();
+    files.forEach((file) => formData.append('files', file));
 
-      setRows((currentRows) => [...currentRows, ...mergedRows]);
-      setLoadedFiles((currentFiles) => [
-        ...currentFiles,
-        ...files.map((file) => ({
-          name: file.name,
-          size: file.size,
-          loadedAt: new Date().toISOString(),
-        })),
-      ]);
+    try {
+      const data = await fetchJson(`${API_BASE}/parse-json/`, { method: 'POST', body: formData });
+
+      setRows((currentRows) => [...currentRows, ...data.rows]);
+      setLoadedFiles((currentFiles) => [...currentFiles, ...data.loadedFiles]);
       setLoadError('');
       setPage(0);
     } catch (error) {
@@ -524,6 +443,10 @@ export default function App() {
     } finally {
       event.target.value = '';
     }
+  };
+
+  const handleExport = () => {
+    window.open(`${API_BASE}/export/`, '_blank');
   };
 
   return (
@@ -582,7 +505,12 @@ export default function App() {
                   >
                     Load JSON Files
                   </Button>
-                  <Button variant="outlined" startIcon={<DownloadOutlinedIcon />} disabled>
+                  <Button
+                    variant="outlined"
+                    startIcon={<DownloadOutlinedIcon />}
+                    disabled={!rows.length}
+                    onClick={handleExport}
+                  >
                     Export
                   </Button>
                 </Stack>
@@ -656,7 +584,15 @@ export default function App() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {paginatedRows.length ? (
+                  {isLoading ? (
+                    <TableRow>
+                      <TableCell colSpan={8}>
+                        <Box className="empty-state">
+                          <Typography color="text.secondary">Loading saved execution results…</Typography>
+                        </Box>
+                      </TableCell>
+                    </TableRow>
+                  ) : paginatedRows.length ? (
                     paginatedRows.map((row) => <TestCaseRow key={row.id} row={row} onUpdate={updateRow} />)
                   ) : (
                     <TableRow>
