@@ -19,7 +19,9 @@
     "@mui/material": "^6.5.0",
     "electron": "^37.2.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^6.26.2",
+    "jwt-decode": "^4.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.6.0",

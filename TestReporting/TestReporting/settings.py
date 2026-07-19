@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-n(n!)1w)ss1$u7#+2)13kg$l=d2r+ad!hrl2xn6fsqg&6-&xfe
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True # for production, set this to False and true for local development
 
-ALLOWED_HOSTS = [] # for production, add your domain or IP address here
+ALLOWED_HOSTS = ['*', 'testserver'] # for production, add your domain or IP address here
 
 
 # Application definition
@@ -52,11 +52,26 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Allows the Electron/Vite dev frontend (127.0.0.1:5173) to call this API.
+# Allows the Electron/Vite dev frontend (127.0.0.1:5173) and Django server (127.0.0.1:8000) to call this API.
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5173',
     'http://localhost:5173',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
 ]
+
+CORS_ALLOW_CREDENTIALS = True
+
+# CSRF settings for API with credentials
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:5173',
+    'http://localhost:5173',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+]
+CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SECURE = False  # True in production with HTTPS
 
 ROOT_URLCONF = 'TestReporting.urls'
 
@@ -125,4 +140,10 @@ USE_TZ = True
 
 # For production, you can configure the static files settings as needed
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Serve React build files
+STATICFILES_DIRS = [
+    BASE_DIR / 'desktop' / 'dist',
+]
 
