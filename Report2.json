@@ -1,0 +1,883 @@
+{
+  "session": {
+    "header": {
+      "Python version": "3.10.12"
+    },
+    "sections": {
+      "header": {
+        "TESTSET_ID": "null",
+        "NIP_VERSION": "SDV_01_V19.01.04.00F_V21.00.03.00F",
+        "HW_VERSION": "M03",
+        "TBAD_VERSION": "SDV_01_V19.01.04.00F_01_V21.00.03.00F__SDV_Primary__07072026__001__default.zip",
+        "SW_VERSION": "X4NN",
+        "CD": "/home/jenkins/audi/workspace/AUDI_CH63_SDV_CthRepo_Manuell",
+        "PD": "/home/jenkins/audi/workspace/AUDI_CH63_SDV_CthRepo_Manuell",
+        "PART_NUMBER": "4ME907107  "
+      },
+      "ecus": {
+        "SDV_Primary": {
+          "================== SDV_Primary ==================": {
+            "Target address": 12467,
+            "Server IP address": "fd53:7cb8:383::b3",
+            "Tester address": 3712,
+            "Tester IP address": "fd53:7cb8:383::73",
+            "VIN": "",
+            "Application Software Version Number": "X4NN",
+            "ECU Hardware Number": "4ME907107B",
+            "ECU Hardware Version Number": "M03",
+            "ECU Serial Number": "011B3112504260000016",
+            "FAZIT Identification String": "EYE-QSM25.04.2610010016",
+            "Part Number": "4ME907107  "
+          }
+        }
+      }
+    },
+    "details": {
+      "os": "Linux",
+      "python": "3.10.12",
+      "datetime": "2026-07-07T14:12:48Z",
+      "user": "root",
+      "hostname": "TE06981",
+      "inputs": {
+        "Target_ECUs": [
+          "SDV_Primary"
+        ],
+        "TestSuite": "SDV_MAC_SMOKE.xml",
+        "Database": "",
+        "FrameworkConfig": "channel_mapping.yaml",
+        "EcusConfig": "Config/TestBenchConfigs/AUDI_02/config.xml"
+      }
+    },
+    "statistics": {
+      "total": 3,
+      "duration": 407.05342799999994,
+      "successful": 0,
+      "failed": 3,
+      "errored": 0,
+      "skipped": 0
+    }
+  },
+  "testsuite": [
+    {
+      "name": "MAC_Tests",
+      "children": [
+        {
+          "name": "MAC_Smoke_Tests",
+          "status": "FAIL",
+          "duration": 76.69626,
+          "children": [
+            {
+              "name": "tca_eth_mac_packet_size_validation_max_size",
+              "status": "FAIL",
+              "duration": 76.69626,
+              "children": [
+                {
+                  "name": "tca_eth_mac_packet_size_validation_max_size_XMM_ADAS_PRIM_ETH01_ADAS_Prim",
+                  "status": "FAIL",
+                  "result": "FAIL",
+                  "duration": 76.69626,
+                  "stages": [
+                    {
+                      "name": "setUp",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T14:15:42.954266+00:00",
+                          "message": "# DTC dump\n\nClick [here](file://Tests/MAC_Tests/MAC_Smoke_Tests/tca_eth_mac_packet_size_validation_max_size_XMM_ADAS_PRIM_ETH01_ADAS_Prim/beginning_test_case_dtc_dump.txt) to see DTC dump results",
+                          "type": "DATA_RECORD",
+                          "summary": []
+                        },
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T14:15:42.954638+00:00",
+                          "message": "DTC report for 'SDV_Primary'",
+                          "type": "DATA_RECORD",
+                          "summary": [],
+                          "block_id": 0,
+                          "block_name": "DTC Information Report For 'SDV_Primary': 0 DTC reported",
+                          "table": {
+                            "header": [
+                              "DTC",
+                              "Description",
+                              "Severity",
+                              "Status"
+                            ],
+                            "rows": [],
+                            "meta": {}
+                          }
+                        },
+                        {
+                          "name": "[PRE1]",
+                          "status": "PASS",
+                          "duration": 7.2e-05,
+                          "timestamp": "2026-07-07T14:15:42.955301+00:00",
+                          "message": "The test system must be able to generate and send frames with MTU of at least ${s_mtu_max(byte) +1 Byte.",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[PRE2]",
+                          "status": "PASS",
+                          "duration": 6.1e-05,
+                          "timestamp": "2026-07-07T14:15:42.956195+00:00",
+                          "message": "KL 15 is ON",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[PRE3]",
+                          "status": "PASS",
+                          "duration": 7.3e-05,
+                          "timestamp": "2026-07-07T14:15:42.977021+00:00",
+                          "message": "Restbus simulation (RBS) is ON",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[PRE4]",
+                          "status": "PASS",
+                          "duration": 5.1e-05,
+                          "timestamp": "2026-07-07T14:15:42.977846+00:00",
+                          "message": "VKMS is OFF or configured, unlocked and connected to the test system (keys are exchanged).",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "expectTrue",
+                          "status": "PASS",
+                          "duration": 0.000141,
+                          "timestamp": "2026-07-07T14:15:43.042892+00:00",
+                          "message": "The MTU of the test system must be 1500 +1 Byte. ",
+                          "type": "EXPECT",
+                          "summary": [],
+                          "result": "PASS",
+                          "severity": "MAJOR",
+                          "actual_result": "MTU MAX: 1800.",
+                          "expected_result": "MTU MAX: 1501"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "test_execute",
+                      "status": "FAIL",
+                      "stages": [
+                        {
+                          "name": "[TEST STEP 1]",
+                          "status": "PASS",
+                          "duration": 9.6e-05,
+                          "timestamp": "2026-07-07T14:15:43.044022+00:00",
+                          "message": "The test system sends an ICMPv6 echo request to the DUT with any user data and a payload length of (1500 - 8 - 40).",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "expectTrue",
+                          "status": "FAIL",
+                          "duration": 0.000565,
+                          "timestamp": "2026-07-07T14:15:43.378206+00:00",
+                          "message": "The test system must receive an ICMPv6 echo reply message from the DUT within 100.0 ms. The payload must be the same and the CRC must be correct. ",
+                          "type": "EXPECT",
+                          "summary": [
+                            "expectTrue fails, Severity.Severity.MAJOR \"The test system must receive an ICMPv6 echo reply message from the DUT within 100.0 ms. The payload must be the same and the CRC must be correct. \""
+                          ],
+                          "result": "FAIL",
+                          "severity": "MAJOR",
+                          "actual_result": "An ICMPv6 Echo Reply message is received: True",
+                          "expected_result": "An ICMPv6 Echo Reply message is received: True"
+                        },
+                        {
+                          "name": "[TEST STEP 2]",
+                          "status": "PASS",
+                          "duration": 0.000114,
+                          "timestamp": "2026-07-07T14:15:43.379882+00:00",
+                          "message": "The test system sends an ICMPv6 echo request to the DUT with any user data and a payload length of (1500 - 8 - 40 + 1).",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "expectTrue",
+                          "status": "PASS",
+                          "duration": 0.000118,
+                          "timestamp": "2026-07-07T14:15:43.637098+00:00",
+                          "message": "The test system must receive an ICMPv6 echo reply message from the DUT within 100.0 ms. The payload must be the same and the CRC must be correct. ",
+                          "type": "EXPECT",
+                          "summary": [],
+                          "result": "PASS",
+                          "severity": "MAJOR",
+                          "actual_result": "An ICMPv6 Echo Reply message is not received: False",
+                          "expected_result": "An ICMPv6 Echo Reply message is not received: True"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "tearDown",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T14:16:29.683725+00:00",
+                          "message": "# DTC dump\n\nClick [here](file://Tests/MAC_Tests/MAC_Smoke_Tests/tca_eth_mac_packet_size_validation_max_size_XMM_ADAS_PRIM_ETH01_ADAS_Prim/end_of_test_case_dtc_dump.txt) to see DTC dump results",
+                          "type": "DATA_RECORD",
+                          "summary": []
+                        },
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T14:16:29.684067+00:00",
+                          "message": "DTC report for 'SDV_Primary'",
+                          "type": "DATA_RECORD",
+                          "summary": [],
+                          "block_id": 1,
+                          "block_name": "DTC Information Report For 'SDV_Primary': 0 DTC reported",
+                          "table": {
+                            "header": [
+                              "DTC",
+                              "Description",
+                              "Severity",
+                              "Status"
+                            ],
+                            "rows": [],
+                            "meta": {}
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "summary": [
+                    "tca_eth_mac_packet_size_validation_max_size_XMM_ADAS_PRIM_ETH01_ADAS_Prim fails",
+                    "FAILURE: \tSeverity.MAJOR\tThe test system must receive an ICMPv6 echo reply message from the DUT within 100.0 ms. The payload must be the same and the CRC must be correct. Actual: (An ICMPv6 Echo Reply message is received: True) Expected: (An ICMPv6 Echo Reply message is received: True)Tests/networking_testcases/technologies_testcases/eth_mac_testcases/frame_format/tca_ETH_MAC_Packet_Size_Validation_MAX_Size.py:79 in test_execute() -> self.expectTrue("
+                  ],
+                  "details": "Failure in test_execute",
+                  "metadata": {
+                    "tc_id": "ETH_MAC_Packet_Size_Validation_MAX_Size",
+                    "status": "Ready",
+                    "description": "The test case consists of two parts. Verification: The test system sends a packet with the maximum allowed packet size and checks the proper reception. Falsification: The test system sends a packet that exceeds the maximum allowed size by one byte. The DUT must discard the packet and signal the error.",
+                    "authors": [
+                      "grodriguez"
+                    ],
+                    "review_status": "Reviewed",
+                    "reviewer": "forellana",
+                    "requirement": [
+                      "MAC_225",
+                      "MAC_1323",
+                      "MAC_1379"
+                    ],
+                    "domain": "ETH_MAC",
+                    "targets": [
+                      [
+                        "HCP5_P1_Gateway",
+                        true
+                      ]
+                    ],
+                    "testbench_types": [
+                      "M"
+                    ],
+                    "test_type": [
+                      "Requirements-based test"
+                    ],
+                    "cb_testcase_id": "41091714",
+                    "cb_testspec_id": "36656821",
+                    "severity": "MAJOR",
+                    "technica_jira_testcase_ids": "CTH-31262"
+                  },
+                  "parameters": {
+                    "__custom_name__": "XMM_ADAS_PRIM_ETH01_ADAS_Prim",
+                    "partition_port": "ADAS_Prim_CPUPort1",
+                    "target_partition": "ADAS_Prim",
+                    "dut_ip": "fd53:7cb8:383::b3",
+                    "dut_mac": "['02:7d:fa:00:b3:00']",
+                    "vlan_id": "2",
+                    "outer_vlan": "None",
+                    "gw_ip": "fd53:7cb8:0383:0000:0000:0000:0000:0171",
+                    "dut_port": "ADAS_Prim_CPUPort1",
+                    "wireshark_filter": "data.data == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or uds or tcp.payload == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or udp.payload ==74:65:63:68:6e:69:63:61:5f:74:65:73:74 or udp.length == 1 or  tcp.options == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or ipv6.plen == 1",
+                    "com_partners": "['fd53:7cb8:383::73']",
+                    "unicast_partners": "['fd53:7cb8:383::73']",
+                    "channel_name": "XMM_ADAS_PRIM_ETH01",
+                    "real_channel_name": "XMM_ADAS_Prim_ETH01",
+                    "startuptime": "60.0",
+                    "shutdowntime": "35.0",
+                    "switch_type": "Das DUT hat einen internen Switch und der Switch selbst ist gPTP Slave am Host Prozessor oder einem weiteren Switch",
+                    "dtc_mac_address_konflict": "False",
+                    "t_TCP_NACK_CLOSE_MIN": "None",
+                    "t_TCP_NACK_CLOSE_MAX": "10",
+                    "relevant": "True",
+                    "skiping_reason": "",
+                    "physical_adapter": "ETH_TimeSync",
+                    "sending_interface": "ETH_TimeSync",
+                    "port_info": "{'XMM': {'src_mac': ['02:7d:fa:01:73:00'], 'vlan_id': 2, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Prim_XMM_ETH01', 'channel_id': None, 'ip_adress': 'fd53:7cb8:383::73'}, 'ADAS_basic': {'src_mac': ['02:7d:fa:01:71:00'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Prim_ADAS_basic_ETH01', 'channel_id': 57371, 'ip_adress': 'fd53:7cb8:383:15::171'}, 'SRR_SiLe': {'src_mac': ['02:7d:fa:00:bf:00'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': 773, 'channel_name': 'ADAS_Prim_SRR_SiLe_ETH01', 'channel_id': 37211, 'ip_adress': 'fd53:7cb8:383:15::bf'}, 'SRR_SiRi': {'src_mac': ['02:7d:fa:00:c0:00'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': 774, 'channel_name': 'ADAS_Prim_SRR_SiRi_ETH01', 'channel_id': 37227, 'ip_adress': 'fd53:7cb8:383:15::c0'}, 'MRR_ReLe': {'src_mac': ['02:7d:fa:00:01:8d'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': 771, 'channel_name': 'ADAS_Prim_MRR_ReLe_ETH01', 'channel_id': 37147, 'ip_adress': 'fd53:7cb8:383:15::18d'}, 'MRR_ReRi': {'src_mac': ['02:7d:fa:00:01:8e'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': 772, 'channel_name': 'ADAS_Prim_MRR_ReRi_ETH01', 'channel_id': 37195, 'ip_adress': 'fd53:7cb8:383:15::18e'}, 'TestSysIP': {'src_mac': ['02:7d:fa:03:aa:00'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Prim_TestSysIP_ETH01', 'channel_id': None, 'ip_adress': 'fd53:7cb8:383:15::3aa'}, 'ADAS_Scnd': {'src_mac': ['02:7d:fa:00:b2:00'], 'vlan_id': 2, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Basic_ADAS_Prim_ETH01', 'channel_id': 37147, 'ip_adress': 'fd53:7cb8:383::b2'}}",
+                    "sender_info": "{'src_mac': ['02:7d:fa:01:73:00'], 'vlan_id': 2, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Prim_XMM_ETH01', 'channel_id': None, 'ip_adress': 'fd53:7cb8:383::73'}",
+                    "gptp_role": "1"
+                  },
+                  "children": []
+                }
+              ],
+              "execution_mapping_ids": [
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "name": "MAC_Switch_Smoke_Switch_Tests",
+          "status": "FAIL",
+          "duration": 330.357168,
+          "children": [
+            {
+              "name": "tca_eth_mac_minimum_frame_size_switch",
+              "status": "FAIL",
+              "duration": 146.844431,
+              "children": [
+                {
+                  "name": "tca_eth_mac_minimum_frame_size_switch_XMM_ADAS_PRIM_ETH01_ADAS_Prim",
+                  "status": "FAIL",
+                  "result": "FAIL",
+                  "duration": 146.844431,
+                  "stages": [
+                    {
+                      "name": "setUp",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T14:17:28.864873+00:00",
+                          "message": "# DTC dump\n\nClick [here](file://Tests/MAC_Tests/MAC_Switch_Smoke_Switch_Tests/tca_eth_mac_minimum_frame_size_switch_XMM_ADAS_PRIM_ETH01_ADAS_Prim/beginning_test_case_dtc_dump.txt) to see DTC dump results",
+                          "type": "DATA_RECORD",
+                          "summary": []
+                        },
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T14:17:28.865206+00:00",
+                          "message": "DTC report for 'SDV_Primary'",
+                          "type": "DATA_RECORD",
+                          "summary": [],
+                          "block_id": 2,
+                          "block_name": "DTC Information Report For 'SDV_Primary': 0 DTC reported",
+                          "table": {
+                            "header": [
+                              "DTC",
+                              "Description",
+                              "Severity",
+                              "Status"
+                            ],
+                            "rows": [],
+                            "meta": {}
+                          }
+                        },
+                        {
+                          "name": "[PRE1]",
+                          "status": "PASS",
+                          "duration": 6.5e-05,
+                          "timestamp": "2026-07-07T14:17:28.865806+00:00",
+                          "message": "DUT contains a switch with at least two external ports",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[PRE2]",
+                          "status": "PASS",
+                          "duration": 7.2e-05,
+                          "timestamp": "2026-07-07T14:17:28.866773+00:00",
+                          "message": "Kl. 15 is ON",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[PRE3]",
+                          "status": "PASS",
+                          "duration": 0.000186,
+                          "timestamp": "2026-07-07T14:18:38.955174+00:00",
+                          "message": "Restbus simulation (RBS) is ON",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[PRE4]",
+                          "status": "PASS",
+                          "duration": 7.6e-05,
+                          "timestamp": "2026-07-07T14:18:38.956514+00:00",
+                          "message": "VKMS is OFF or configured, unlocked and connected to the test system (keys are exchanged).",
+                          "type": "STEP",
+                          "summary": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "test_execute",
+                      "status": "FAIL",
+                      "stages": [
+                        {
+                          "name": "[TEST STEP 1]",
+                          "status": "PASS",
+                          "duration": 0.000115,
+                          "timestamp": "2026-07-07T14:18:38.957552+00:00",
+                          "message": "Set supply voltage to 13",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[TEST STEP 2]",
+                          "status": "PASS",
+                          "duration": 8.3e-05,
+                          "timestamp": "2026-07-07T14:18:38.969490+00:00",
+                          "message": "A test station is active and ready to generate and to capture all traffic to/from DUT on every port.",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[TEST STEP 3]",
+                          "status": "PASS",
+                          "duration": 0.000176,
+                          "timestamp": "2026-07-07T14:18:39.191999+00:00",
+                          "message": "From test station, transmit 199 frames with a size of 64 bytes to every DUT port and to any external destination as defined in K-Matrix for the certain DUT.",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[TEST STEP 4]",
+                          "status": "PASS",
+                          "duration": 0.000151,
+                          "timestamp": "2026-07-07T14:18:39.950274+00:00",
+                          "message": "Wait 60000(ms)",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[TEST STEP 5]",
+                          "status": "PASS",
+                          "duration": 7.7e-05,
+                          "timestamp": "2026-07-07T14:18:39.951050+00:00",
+                          "message": "Verify that all frames of size 64 byte are received from the DUT.",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "assertTrue",
+                          "status": "FAIL",
+                          "duration": 8.9e-05,
+                          "timestamp": "2026-07-07T14:18:39.951695+00:00",
+                          "message": "All frames are forwarded by the DUT with a frame size of 64 bytes. \n            Actual: (Received: 192 frames) \n            Expected: (Received: 199 frames)",
+                          "type": "ASSERT",
+                          "summary": [
+                            "assertTrue fails, Severity.Severity.MAJOR \"All frames are forwarded by the DUT with a frame size of 64 bytes. \n            Actual: (Received: 192 frames) \n            Expected: (Received: 199 frames)\""
+                          ],
+                          "result": "FAIL",
+                          "severity": "MAJOR",
+                          "actual_result": "False",
+                          "expected_result": "True"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "tearDown",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T14:19:26.001825+00:00",
+                          "message": "# DTC dump\n\nClick [here](file://Tests/MAC_Tests/MAC_Switch_Smoke_Switch_Tests/tca_eth_mac_minimum_frame_size_switch_XMM_ADAS_PRIM_ETH01_ADAS_Prim/end_of_test_case_dtc_dump.txt) to see DTC dump results",
+                          "type": "DATA_RECORD",
+                          "summary": []
+                        },
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T14:19:26.002162+00:00",
+                          "message": "DTC report for 'SDV_Primary'",
+                          "type": "DATA_RECORD",
+                          "summary": [],
+                          "block_id": 3,
+                          "block_name": "DTC Information Report For 'SDV_Primary': 0 DTC reported",
+                          "table": {
+                            "header": [
+                              "DTC",
+                              "Description",
+                              "Severity",
+                              "Status"
+                            ],
+                            "rows": [],
+                            "meta": {}
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "summary": [
+                    "tca_eth_mac_minimum_frame_size_switch_XMM_ADAS_PRIM_ETH01_ADAS_Prim fails",
+                    "AssertionError: \tSeverity.MAJOR\tAll frames are forwarded by the DUT with a frame size of 64 bytes. \n            Actual: (Received: 192 frames) \n            Expected: (Received: 199 frames)\t"
+                  ],
+                  "details": "Failure in test_execute",
+                  "metadata": {
+                    "tc_id": "ETH_MAC_minimum_frame_size_switch",
+                    "status": "Ready",
+                    "description": "This test checks if the frames transmitted and forwarded by an ECU that contains a switch are at least 64 bytes. The frames should not be transmitted to internal ports, i.e., internal partitions of DUT.",
+                    "authors": [
+                      "grodriguez"
+                    ],
+                    "review_status": "Reviewed",
+                    "reviewer": "forellana",
+                    "requirement": [
+                      "MAC_1174"
+                    ],
+                    "domain": "ETH_MAC",
+                    "targets": [
+                      [
+                        "HCP5_P1_Gateway",
+                        true
+                      ]
+                    ],
+                    "testbench_types": [
+                      "M"
+                    ],
+                    "test_type": [
+                      "Requirements-based test"
+                    ],
+                    "cb_testcase_id": "41091707",
+                    "cb_testspec_id": "8795653",
+                    "severity": "MAJOR",
+                    "technica_jira_testcase_ids": "CTH-30267"
+                  },
+                  "parameters": {
+                    "__custom_name__": "XMM_ADAS_PRIM_ETH01_ADAS_Prim",
+                    "partition_port": "ADAS_Prim_CPUPort1",
+                    "target_partition": "ADAS_Prim",
+                    "dut_ip": "fd53:7cb8:383::b3",
+                    "dut_mac": "['02:7d:fa:00:b3:00']",
+                    "vlan_id": "2",
+                    "outer_vlan": "None",
+                    "gw_ip": "fd53:7cb8:0383:0000:0000:0000:0000:0171",
+                    "dut_port": "ADAS_Prim_CPUPort1",
+                    "wireshark_filter": "data.data == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or uds or tcp.payload == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or udp.payload ==74:65:63:68:6e:69:63:61:5f:74:65:73:74 or udp.length == 1 or  tcp.options == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or ipv6.plen == 1",
+                    "com_partners": "['fd53:7cb8:383::73']",
+                    "unicast_partners": "['fd53:7cb8:383::73']",
+                    "channel_name": "XMM_ADAS_PRIM_ETH01",
+                    "real_channel_name": "XMM_ADAS_Prim_ETH01",
+                    "startuptime": "60.0",
+                    "shutdowntime": "35.0",
+                    "switch_type": "Das DUT hat einen internen Switch und der Switch selbst ist gPTP Slave am Host Prozessor oder einem weiteren Switch",
+                    "dtc_mac_address_konflict": "False",
+                    "t_TCP_NACK_CLOSE_MIN": "None",
+                    "t_TCP_NACK_CLOSE_MAX": "10",
+                    "relevant": "True",
+                    "skiping_reason": "",
+                    "physical_adapter": "ETH_TimeSync",
+                    "sending_interface": "ETH_TimeSync",
+                    "port_info": "{'XMM': {'src_mac': ['02:7d:fa:01:73:00'], 'vlan_id': 2, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Prim_XMM_ETH01', 'channel_id': None, 'ip_adress': 'fd53:7cb8:383::73'}, 'ADAS_basic': {'src_mac': ['02:7d:fa:01:71:00'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Prim_ADAS_basic_ETH01', 'channel_id': 57371, 'ip_adress': 'fd53:7cb8:383:15::171'}, 'SRR_SiLe': {'src_mac': ['02:7d:fa:00:bf:00'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': 773, 'channel_name': 'ADAS_Prim_SRR_SiLe_ETH01', 'channel_id': 37211, 'ip_adress': 'fd53:7cb8:383:15::bf'}, 'SRR_SiRi': {'src_mac': ['02:7d:fa:00:c0:00'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': 774, 'channel_name': 'ADAS_Prim_SRR_SiRi_ETH01', 'channel_id': 37227, 'ip_adress': 'fd53:7cb8:383:15::c0'}, 'MRR_ReLe': {'src_mac': ['02:7d:fa:00:01:8d'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': 771, 'channel_name': 'ADAS_Prim_MRR_ReLe_ETH01', 'channel_id': 37147, 'ip_adress': 'fd53:7cb8:383:15::18d'}, 'MRR_ReRi': {'src_mac': ['02:7d:fa:00:01:8e'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': 772, 'channel_name': 'ADAS_Prim_MRR_ReRi_ETH01', 'channel_id': 37195, 'ip_adress': 'fd53:7cb8:383:15::18e'}, 'TestSysIP': {'src_mac': ['02:7d:fa:03:aa:00'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Prim_TestSysIP_ETH01', 'channel_id': None, 'ip_adress': 'fd53:7cb8:383:15::3aa'}, 'ADAS_Scnd': {'src_mac': ['02:7d:fa:00:b2:00'], 'vlan_id': 2, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Basic_ADAS_Prim_ETH01', 'channel_id': 37147, 'ip_adress': 'fd53:7cb8:383::b2'}}",
+                    "sender_info": "{'src_mac': ['02:7d:fa:01:73:00'], 'vlan_id': 2, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Prim_XMM_ETH01', 'channel_id': None, 'ip_adress': 'fd53:7cb8:383::73'}",
+                    "gptp_role": "1"
+                  },
+                  "children": []
+                }
+              ],
+              "execution_mapping_ids": [
+                6
+              ]
+            },
+            {
+              "name": "tca_eth_mac_maximum_frame_size_switch",
+              "status": "FAIL",
+              "duration": 183.512737,
+              "children": [
+                {
+                  "name": "tca_eth_mac_maximum_frame_size_switch_XMM_ADAS_PRIM_ETH01_ADAS_Prim",
+                  "status": "FAIL",
+                  "result": "FAIL",
+                  "duration": 183.512737,
+                  "stages": [
+                    {
+                      "name": "setUp",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T14:20:28.129632+00:00",
+                          "message": "# DTC dump\n\nClick [here](file://Tests/MAC_Tests/MAC_Switch_Smoke_Switch_Tests/tca_eth_mac_maximum_frame_size_switch_XMM_ADAS_PRIM_ETH01_ADAS_Prim/beginning_test_case_dtc_dump.txt) to see DTC dump results",
+                          "type": "DATA_RECORD",
+                          "summary": []
+                        },
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T14:20:28.129985+00:00",
+                          "message": "DTC report for 'SDV_Primary'",
+                          "type": "DATA_RECORD",
+                          "summary": [],
+                          "block_id": 4,
+                          "block_name": "DTC Information Report For 'SDV_Primary': 0 DTC reported",
+                          "table": {
+                            "header": [
+                              "DTC",
+                              "Description",
+                              "Severity",
+                              "Status"
+                            ],
+                            "rows": [],
+                            "meta": {}
+                          }
+                        },
+                        {
+                          "name": "[PRE 1]",
+                          "status": "PASS",
+                          "duration": 9.5e-05,
+                          "timestamp": "2026-07-07T14:20:28.196990+00:00",
+                          "message": "DUT contains a switch with at least two external ports",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[PRE 2]",
+                          "status": "PASS",
+                          "duration": 6.1e-05,
+                          "timestamp": "2026-07-07T14:20:28.197879+00:00",
+                          "message": "Kl. 15 is ON",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[PRE 3]",
+                          "status": "PASS",
+                          "duration": 0.000158,
+                          "timestamp": "2026-07-07T14:21:38.223815+00:00",
+                          "message": "Restbus simulation (RBS) is ON",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[PRE 4]",
+                          "status": "PASS",
+                          "duration": 6.4e-05,
+                          "timestamp": "2026-07-07T14:21:38.224859+00:00",
+                          "message": "VKMS is OFF or configured, unlocked and connected to the test system (keys are exchanged).",
+                          "type": "STEP",
+                          "summary": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "test_execute",
+                      "status": "FAIL",
+                      "stages": [
+                        {
+                          "name": "[TEST STEP 1]",
+                          "status": "PASS",
+                          "duration": 6.9e-05,
+                          "timestamp": "2026-07-07T14:21:38.225665+00:00",
+                          "message": "Set supply voltage to 13 V",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[TEST STEP 2]",
+                          "status": "PASS",
+                          "duration": 6.1e-05,
+                          "timestamp": "2026-07-07T14:21:38.237596+00:00",
+                          "message": "A test station is active and ready to generate and to capture all traffic to/from DUT on every port.",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[TEST STEP 3]",
+                          "status": "PASS",
+                          "duration": 0.000372,
+                          "timestamp": "2026-07-07T14:21:38.424588+00:00",
+                          "message": "From test station, transmit 199 frames with a MAC payload size of 1500 bytes to every DUT port and to any external destination as defined in K-Matrix for the certain DUT.",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[TEST STEP 5]",
+                          "status": "PASS",
+                          "duration": 0.000186,
+                          "timestamp": "2026-07-07T14:21:42.481110+00:00",
+                          "message": "Verify that all frames are received from the DUT with a MAC payload size 1500",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "expectTrue",
+                          "status": "FAIL",
+                          "duration": 0.000387,
+                          "timestamp": "2026-07-07T14:21:42.482227+00:00",
+                          "message": " Actual: (Received: 53 frames) \n            Expected: (Received: 1194 frames)",
+                          "type": "EXPECT",
+                          "summary": [
+                            "expectTrue fails, Severity.Severity.MAJOR \" Actual: (Received: 53 frames) \n            Expected: (Received: 1194 frames)\""
+                          ],
+                          "result": "FAIL",
+                          "severity": "MAJOR",
+                          "actual_result": "False",
+                          "expected_result": "True"
+                        },
+                        {
+                          "name": "[TEST STEP 6]",
+                          "status": "PASS",
+                          "duration": 8.4e-05,
+                          "timestamp": "2026-07-07T14:21:42.483331+00:00",
+                          "message": "From test station, transmit 199 frames with a MAC payload size of (1500 + 1) bytes to every DUT port and to any external destination as defined in K-Matrix for the certain DUT.",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[TEST STEP 7]",
+                          "status": "PASS",
+                          "duration": 0.000149,
+                          "timestamp": "2026-07-07T14:21:43.563005+00:00",
+                          "message": "Wait 3 (s)",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "[TEST STEP 8]",
+                          "status": "PASS",
+                          "duration": 8e-05,
+                          "timestamp": "2026-07-07T14:21:43.563759+00:00",
+                          "message": "Verify that no frame is received from the DUT with a MAC payload size bigger than 1500",
+                          "type": "STEP",
+                          "summary": []
+                        },
+                        {
+                          "name": "expectTrue",
+                          "status": "FAIL",
+                          "duration": 0.000289,
+                          "timestamp": "2026-07-07T14:21:43.564402+00:00",
+                          "message": "No frame is received from the DUT with a MAC payload size bigger than 1500. \n            Actual: (Received: 90 frames) \n            Expected: (Received: 0 frames)",
+                          "type": "EXPECT",
+                          "summary": [
+                            "expectTrue fails, Severity.Severity.MAJOR \"No frame is received from the DUT with a MAC payload size bigger than 1500. \n            Actual: (Received: 90 frames) \n            Expected: (Received: 0 frames)\""
+                          ],
+                          "result": "FAIL",
+                          "severity": "MAJOR",
+                          "actual_result": "False",
+                          "expected_result": "True"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "tearDown",
+                      "status": "PASS",
+                      "stages": [
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T14:22:29.613606+00:00",
+                          "message": "# DTC dump\n\nClick [here](file://Tests/MAC_Tests/MAC_Switch_Smoke_Switch_Tests/tca_eth_mac_maximum_frame_size_switch_XMM_ADAS_PRIM_ETH01_ADAS_Prim/end_of_test_case_dtc_dump.txt) to see DTC dump results",
+                          "type": "DATA_RECORD",
+                          "summary": []
+                        },
+                        {
+                          "name": "INF",
+                          "status": "PASS",
+                          "duration": 0.0,
+                          "timestamp": "2026-07-07T14:22:29.613957+00:00",
+                          "message": "DTC report for 'SDV_Primary'",
+                          "type": "DATA_RECORD",
+                          "summary": [],
+                          "block_id": 5,
+                          "block_name": "DTC Information Report For 'SDV_Primary': 0 DTC reported",
+                          "table": {
+                            "header": [
+                              "DTC",
+                              "Description",
+                              "Severity",
+                              "Status"
+                            ],
+                            "rows": [],
+                            "meta": {}
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "summary": [
+                    "tca_eth_mac_maximum_frame_size_switch_XMM_ADAS_PRIM_ETH01_ADAS_Prim fails",
+                    "FAILURE: \tSeverity.MAJOR\t Actual: (Received: 53 frames)Expected: (Received: 1194 frames)Tests/networking_testcases/technologies_testcases/eth_mac_testcases/frame_format/tca_ETH_MAC_maximum_frame_size_switch.py:76 in test_execute() -> self.expectTrue(",
+                    "FAILURE: \tSeverity.MAJOR\tNo frame is received from the DUT with a MAC payload size bigger than 1500.Actual: (Received: 90 frames)Expected: (Received: 0 frames)Tests/networking_testcases/technologies_testcases/eth_mac_testcases/frame_format/tca_ETH_MAC_maximum_frame_size_switch.py:99 in test_execute() -> self.expectTrue("
+                  ],
+                  "details": "Failure in test_execute",
+                  "metadata": {
+                    "tc_id": "ETH_MAC_maximum_frame_size_switch",
+                    "status": "Implemented",
+                    "description": "This test checks if the frames transmitted and forwarded by an ECU that contains a switch do not exceed the specified maximum MAC payload size (default: 1500 bytes).",
+                    "authors": [
+                      "forellana"
+                    ],
+                    "review_status": "Reviewed",
+                    "reviewer": "iestevez",
+                    "requirement": [
+                      "MAC_225",
+                      "MAC_1379"
+                    ],
+                    "domain": "ETH_MAC",
+                    "testbench_types": [
+                      "S",
+                      "M"
+                    ],
+                    "test_type": [
+                      "Requirements-based test"
+                    ],
+                    "cb_testcase_id": "41091709",
+                    "cb_testspec_id": "8795656",
+                    "severity": "MAJOR",
+                    "technica_jira_testcase_ids": "CTH-30186"
+                  },
+                  "parameters": {
+                    "__custom_name__": "XMM_ADAS_PRIM_ETH01_ADAS_Prim",
+                    "partition_port": "ADAS_Prim_CPUPort1",
+                    "target_partition": "ADAS_Prim",
+                    "dut_ip": "fd53:7cb8:383::b3",
+                    "dut_mac": "['02:7d:fa:00:b3:00']",
+                    "vlan_id": "2",
+                    "outer_vlan": "None",
+                    "gw_ip": "fd53:7cb8:0383:0000:0000:0000:0000:0171",
+                    "dut_port": "ADAS_Prim_CPUPort1",
+                    "wireshark_filter": "data.data == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or uds or tcp.payload == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or udp.payload ==74:65:63:68:6e:69:63:61:5f:74:65:73:74 or udp.length == 1 or  tcp.options == 74:65:63:68:6e:69:63:61:5f:74:65:73:74 or ipv6.plen == 1",
+                    "com_partners": "['fd53:7cb8:383::73']",
+                    "unicast_partners": "['fd53:7cb8:383::73']",
+                    "channel_name": "XMM_ADAS_PRIM_ETH01",
+                    "real_channel_name": "XMM_ADAS_Prim_ETH01",
+                    "startuptime": "60.0",
+                    "shutdowntime": "35.0",
+                    "switch_type": "Das DUT hat einen internen Switch und der Switch selbst ist gPTP Slave am Host Prozessor oder einem weiteren Switch",
+                    "dtc_mac_address_konflict": "False",
+                    "t_TCP_NACK_CLOSE_MIN": "None",
+                    "t_TCP_NACK_CLOSE_MAX": "10",
+                    "relevant": "True",
+                    "skiping_reason": "",
+                    "physical_adapter": "ETH_TimeSync",
+                    "sending_interface": "ETH_TimeSync",
+                    "port_info": "{'XMM': {'src_mac': ['02:7d:fa:01:73:00'], 'vlan_id': 2, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Prim_XMM_ETH01', 'channel_id': None, 'ip_adress': 'fd53:7cb8:383::73'}, 'ADAS_basic': {'src_mac': ['02:7d:fa:01:71:00'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Prim_ADAS_basic_ETH01', 'channel_id': 57371, 'ip_adress': 'fd53:7cb8:383:15::171'}, 'SRR_SiLe': {'src_mac': ['02:7d:fa:00:bf:00'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': 773, 'channel_name': 'ADAS_Prim_SRR_SiLe_ETH01', 'channel_id': 37211, 'ip_adress': 'fd53:7cb8:383:15::bf'}, 'SRR_SiRi': {'src_mac': ['02:7d:fa:00:c0:00'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': 774, 'channel_name': 'ADAS_Prim_SRR_SiRi_ETH01', 'channel_id': 37227, 'ip_adress': 'fd53:7cb8:383:15::c0'}, 'MRR_ReLe': {'src_mac': ['02:7d:fa:00:01:8d'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': 771, 'channel_name': 'ADAS_Prim_MRR_ReLe_ETH01', 'channel_id': 37147, 'ip_adress': 'fd53:7cb8:383:15::18d'}, 'MRR_ReRi': {'src_mac': ['02:7d:fa:00:01:8e'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': 772, 'channel_name': 'ADAS_Prim_MRR_ReRi_ETH01', 'channel_id': 37195, 'ip_adress': 'fd53:7cb8:383:15::18e'}, 'TestSysIP': {'src_mac': ['02:7d:fa:03:aa:00'], 'vlan_id': 21, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Prim_TestSysIP_ETH01', 'channel_id': None, 'ip_adress': 'fd53:7cb8:383:15::3aa'}, 'ADAS_Scnd': {'src_mac': ['02:7d:fa:00:b2:00'], 'vlan_id': 2, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Basic_ADAS_Prim_ETH01', 'channel_id': 37147, 'ip_adress': 'fd53:7cb8:383::b2'}}",
+                    "sender_info": "{'src_mac': ['02:7d:fa:01:73:00'], 'vlan_id': 2, 'vlan_priority': 0, 'outer_vlan': None, 'channel_name': 'ADAS_Prim_XMM_ETH01', 'channel_id': None, 'ip_adress': 'fd53:7cb8:383::73'}",
+                    "gptp_role": "1"
+                  },
+                  "children": []
+                }
+              ],
+              "execution_mapping_ids": [
+                7
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -18,6 +18,7 @@ urlpatterns = [
     path('executions/<int:execution_id>/detail/', views.get_execution_detail, name='reports-execution-detail'),
     path('parse-json/', views.parse_json_reports, name='reports-parse-json'),
     path('assign-ticket/', views.assign_executions_to_ticket, name='reports-assign-ticket'),
+    path('executions/<int:execution_id>/unassign/', views.unassign_execution, name='reports-unassign-execution'),
     path('executions/', views.list_executions, name='reports-list-executions'),
     path('testcases/', views.list_testcases, name='reports-list-testcases'),
     path('testcases/<int:testcase_id>/', views.update_testcase, name='reports-update-testcase'),

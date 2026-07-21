@@ -363,7 +363,7 @@ function TestCasesTable({ testcases, onUpdateTestcase }) {
 }
 
 // ===== Execution Row =====
-function ExecutionRow({ execution, onToggle, isExpanded, onUpdateTestcase }) {
+function ExecutionRow({ execution, onToggle, isExpanded, onUpdateTestcase, onAssign, onUnassign, onViewTicket }) {
   const counts = { passed: 0, failed: 0, skipped: 0, notExecuted: 0 };
   execution.testcases.forEach(tc => {
     if (tc.status === 'Passed') counts.passed++;
@@ -387,7 +387,7 @@ function ExecutionRow({ execution, onToggle, isExpanded, onUpdateTestcase }) {
         </TableCell>
         <TableCell><Typography fontWeight={600} fontSize={12} fontFamily="monospace">#{execution.id}</Typography></TableCell>
         <TableCell><Typography fontSize={12}>{new Date(execution.uploadedAt).toLocaleDateString()}</Typography><Typography color="text.secondary" fontSize={11}>{new Date(execution.uploadedAt).toLocaleTimeString()}</Typography></TableCell>
-        <TableCell>{execution.ticketKey ? <Chip label={execution.ticketKey} size="small" color="primary" variant="outlined" /> : <Typography color="text.secondary" fontSize={11} fontStyle="italic">Not linked</Typography>}</TableCell>
+        <TableCell>{execution.ticketKey ? <Chip label={execution.ticketKey} size="small" color="primary" variant="outlined" onClick={onViewTicket} sx={{ cursor: 'pointer' }} /> : <Typography color="text.secondary" fontSize={11} fontStyle="italic">Not linked</Typography>}</TableCell>
         <TableCell>
           <Stack direction="row" spacing={0.5} sx={{ flexWrap: 'wrap' }}>
             {counts.passed > 0 && <Chip label={`✓ ${counts.passed}`} size="small" color="success" variant="outlined" sx={{ height: 20, fontSize: 10 }} />}
@@ -397,9 +397,19 @@ function ExecutionRow({ execution, onToggle, isExpanded, onUpdateTestcase }) {
           </Stack>
         </TableCell>
         <TableCell><Typography color="text.secondary" fontSize={12}>{execution.testCaseCount} testcases</Typography></TableCell>
+        <TableCell align="center">
+          {execution.ticketKey ? (
+            <ButtonGroup size="small" variant="outlined">
+              <Button startIcon={<LinkOutlined />} onClick={onAssign}>Change</Button>
+              <Button startIcon={<Visibility />} onClick={onViewTicket}>View</Button>
+            </ButtonGroup>
+          ) : (
+            <Button size="small" variant="contained" startIcon={<LinkOutlined />} onClick={onAssign}>Assign</Button>
+          )}
+        </TableCell>
       </TableRow>
       <TableRow>
-        <TableCell className="expanded-cell" colSpan={8}>
+        <TableCell className="expanded-cell" colSpan={9}>
           <Collapse in={isExpanded} timeout="auto" unmountOnExit>
             <Box className="expanded-panel" sx={{ p: 0 }}>
               <TestCasesTable testcases={execution.testcases} onUpdateTestcase={onUpdateTestcase} />
@@ -684,7 +694,156 @@ function DashboardPage({ user }) {
   );
 }
 
+// ===== Assign Ticket Dialog =====
+function AssignTicketDialog({ open, tickets, execution, onClose, onAssign }) {
+  const [search, setSearch] = useState('');
+  const [selectedTicket, setSelectedTicket] = useState(null);
+  const [assigning, setAssigning] = useState(false);
+
+  useEffect(() => {
+    if (open) { setSearch(''); setSelectedTicket(null); }
+  }, [open]);
+
+  const filtered = useMemo(() => {
+    if (!search) return tickets;
+    const q = search.toLowerCase();
+    return tickets.filter(t =>
+      t.key.toLowerCase().includes(q) ||
+      t.title.toLowerCase().includes(q) ||
+      (t.description || '').toLowerCase().includes(q)
+    );
+  }, [tickets, search]);
+
+  const handleAssign = async () => {
+    if (!selectedTicket) return;
+    setAssigning(true);
+    try {
+      await fetchJson(`${API_BASE}/assign-ticket/`, {
+        method: 'POST',
+        body: JSON.stringify({ execution_ids: [execution.id], ticket_id: selectedTicket.id }),
+      });
+      onAssign();
+      onClose();
+    } catch (err) {
+      alert('Failed to assign: ' + err.message);
+    } finally {
+      setAssigning(false);
+    }
+  };
+
+  return (
+    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+      <DialogTitle sx={{ fontWeight: 700 }}>
+        {execution.ticketKey ? 'Change Ticket' : 'Assign to Ticket'}
+      </DialogTitle>
+      <DialogContent dividers>
+        <Typography color="text.secondary" fontSize={13} sx={{ mb: 2 }}>
+          {execution.ticketKey
+            ? `Execution "${execution.fileName}" is currently linked to ${execution.ticketKey}. Select a new ticket below.`
+            : `Select a ticket to link execution "${execution.fileName}" to.`
+          }
+        </Typography>
+        <TextField
+          autoFocus fullWidth size="small" placeholder="Search tickets by key, title, or description..."
+          value={search} onChange={e => setSearch(e.target.value)}
+          InputProps={{ startAdornment: <InputAdornment position="start"><SearchOutlined fontSize="small" /></InputAdornment> }}
+          sx={{ mb: 2 }}
+        />
+        <Box sx={{ maxHeight: 360, overflow: 'auto' }}>
+          {filtered.length === 0 ? (
+            <Typography color="text.secondary" fontSize={13} sx={{ py: 3, textAlign: 'center' }}>No tickets found.</Typography>
+          ) : (
+            <List dense disablePadding>
+              {filtered.map(t => (
+                <ListItem
+                  key={t.id}
+                  button
+                  selected={selectedTicket?.id === t.id}
+                  onClick={() => setSelectedTicket(t)}
+                  sx={{
+                    borderRadius: 1, mb: 0.5,
+                    border: '1px solid',
+                    borderColor: selectedTicket?.id === t.id ? 'primary.main' : 'transparent',
+                    '&.Mui-selected': { bgcolor: 'primary.light', '&:hover': { bgcolor: 'primary.light' } },
+                  }}
+                >
+                  <ListItemIcon sx={{ minWidth: 36 }}>
+                    <AssignmentOutlined fontSize="small" color={selectedTicket?.id === t.id ? 'primary' : 'disabled'} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={<Typography fontWeight={700} fontSize={13}>{t.key} — {t.title}</Typography>}
+                    secondary={<Typography fontSize={11} color="text.secondary">{t.status} · {t.executionCount} execution(s)</Typography>}
+                  />
+                  {t.id === execution.ticketId && <Chip label="Current" size="small" color="info" variant="outlined" sx={{ fontSize: 10, height: 20 }} />}
+                </ListItem>
+              ))}
+            </List>
+          )}
+        </Box>
+      </DialogContent>
+      <DialogActions sx={{ px: 3, py: 2 }}>
+        <Button onClick={onClose} disabled={assigning}>Cancel</Button>
+        <Button variant="contained" onClick={handleAssign} disabled={!selectedTicket || assigning}>
+          {assigning ? 'Assigning...' : 'Assign'}
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+}
+
+// ===== View Ticket Dialog =====
+function ViewTicketDialog({ open, ticket, onClose }) {
+  if (!ticket) return null;
+  return (
+    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+      <DialogTitle sx={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: 1.5 }}>
+        <AssignmentOutlined color="primary" /> Ticket Details
+      </DialogTitle>
+      <DialogContent dividers>
+        <Stack spacing={2.5}>
+          <Box>
+            <Typography color="text.secondary" fontSize={11} fontWeight={700} textTransform="uppercase" letterSpacing="0.04em">Ticket Key</Typography>
+            <Typography fontWeight={700} fontSize={16} mt={0.5}>{ticket.key}</Typography>
+          </Box>
+          <Box>
+            <Typography color="text.secondary" fontSize={11} fontWeight={700} textTransform="uppercase" letterSpacing="0.04em">Title</Typography>
+            <Typography fontWeight={600} fontSize={14} mt={0.5}>{ticket.title}</Typography>
+          </Box>
+          <Box>
+            <Typography color="text.secondary" fontSize={11} fontWeight={700} textTransform="uppercase" letterSpacing="0.04em">Description</Typography>
+            <Typography fontSize={13} mt={0.5} sx={{ whiteSpace: 'pre-line' }}>{ticket.description || 'No description'}</Typography>
+          </Box>
+          <Stack direction="row" spacing={3}>
+            <Box>
+              <Typography color="text.secondary" fontSize={11} fontWeight={700} textTransform="uppercase" letterSpacing="0.04em">Status</Typography>
+              <Chip label={ticket.status} size="small" color="primary" variant="outlined" sx={{ mt: 0.5, fontWeight: 700 }} />
+            </Box>
+            <Box>
+              <Typography color="text.secondary" fontSize={11} fontWeight={700} textTransform="uppercase" letterSpacing="0.04em">Approval</Typography>
+              <Chip label={ticket.approvalStatus} size="small" color={ticket.approvalStatus === 'Approved' ? 'success' : ticket.approvalStatus === 'Rejected' ? 'error' : 'warning'} variant="outlined" sx={{ mt: 0.5, fontWeight: 700 }} />
+            </Box>
+          </Stack>
+          <Stack direction="row" spacing={3}>
+            <Box>
+              <Typography color="text.secondary" fontSize={11} fontWeight={700} textTransform="uppercase" letterSpacing="0.04em">Created At</Typography>
+              <Typography fontSize={13} mt={0.5}>{ticket.createdAt ? new Date(ticket.createdAt).toLocaleString() : '—'}</Typography>
+            </Box>
+            <Box>
+              <Typography color="text.secondary" fontSize={11} fontWeight={700} textTransform="uppercase" letterSpacing="0.04em">Assigned To</Typography>
+              <Typography fontSize={13} mt={0.5}>{ticket.assignedUser || 'Unassigned'}</Typography>
+            </Box>
+          </Stack>
+        </Stack>
+      </DialogContent>
+      <DialogActions sx={{ px: 3, py: 2 }}>
+        <Button onClick={onClose}>Close</Button>
+      </DialogActions>
+    </Dialog>
+  );
+}
+
 function ExecutionReportingPage({ user }) {
+  const navigate = useNavigate();
   const [executions, setExecutions] = useState([]);
   const [tickets, setTickets] = useState([]);
   const [selectedTicketId, setSelectedTicketId] = useState(null);
@@ -695,6 +854,10 @@ function ExecutionReportingPage({ user }) {
   const [expanded, setExpanded] = useState({});
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
+  const [assignDialogOpen, setAssignDialogOpen] = useState(false);
+  const [assignTarget, setAssignTarget] = useState(null);
+  const [viewTicketOpen, setViewTicketOpen] = useState(false);
+  const [viewTicketTarget, setViewTicketTarget] = useState(null);
   const fileInputRef = useRef(null);
 
   const loadData = useCallback(() => {
@@ -741,6 +904,32 @@ function ExecutionReportingPage({ user }) {
 
   const handleExport = () => {
     window.open(`${API_BASE}/export/`, '_blank');
+  };
+
+  const openAssignDialog = (execution) => {
+    setAssignTarget(execution);
+    setAssignDialogOpen(true);
+  };
+
+  const handleUnassign = async (executionId) => {
+    try {
+      await fetchJson(`${API_BASE}/executions/${executionId}/unassign/`, { method: 'POST' });
+      await loadData();
+    } catch (err) {
+      alert('Failed to unassign: ' + err.message);
+    }
+  };
+
+  const handleViewTicket = async (execution) => {
+    const ticketId = execution.ticketId;
+    if (!ticketId) return;
+    try {
+      const data = await fetchJson(`${API_BASE}/tickets/${ticketId}/detail/`);
+      setViewTicketTarget(data);
+      setViewTicketOpen(true);
+    } catch (err) {
+      alert('Failed to load ticket details: ' + err.message);
+    }
   };
 
   const filtered = useMemo(() => {
@@ -802,18 +991,35 @@ function ExecutionReportingPage({ user }) {
               <TableCell sx={{ minWidth: 100 }}>Ticket</TableCell>
               <TableCell sx={{ minWidth: 160 }}>Status Summary</TableCell>
               <TableCell sx={{ minWidth: 90 }}>Testcases</TableCell>
+              <TableCell sx={{ minWidth: 120, textAlign: 'center' }}>Actions</TableCell>
             </TableRow></TableHead>
             <TableBody>
               {paginated.length === 0 ? (
-                <TableRow><TableCell colSpan={7}><Box className="empty-state" sx={{ minHeight: 240 }}><FolderOpenOutlined color="primary" sx={{ fontSize: 44, mb: 1 }} /><Typography variant="subtitle1" fontWeight={600}>No executions</Typography><Typography color="text.secondary" fontSize={13}>Select a ticket or load JSON files to begin.</Typography></Box></TableCell></TableRow>
+                <TableRow><TableCell colSpan={8}><Box className="empty-state" sx={{ minHeight: 240 }}><FolderOpenOutlined color="primary" sx={{ fontSize: 44, mb: 1 }} /><Typography variant="subtitle1" fontWeight={600}>No executions</Typography><Typography color="text.secondary" fontSize={13}>Select a ticket or load JSON files to begin.</Typography></Box></TableCell></TableRow>
               ) : (
-                paginated.map(e => <ExecutionRow key={e.id} execution={e} isExpanded={expanded[e.id]} onToggle={() => toggle(e.id)} onUpdateTestcase={updateTestcase} />)
+                paginated.map(e => <ExecutionRow key={e.id} execution={e} isExpanded={expanded[e.id]} onToggle={() => toggle(e.id)} onUpdateTestcase={updateTestcase} onAssign={() => openAssignDialog(e)} onUnassign={() => handleUnassign(e.id)} onViewTicket={() => handleViewTicket(e)} />)
               )}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination component="div" count={filtered.length} page={page} rowsPerPage={rowsPerPage} rowsPerPageOptions={[5,10,25,50]} onPageChange={(_, p) => setPage(p)} onRowsPerPageChange={e => { setRowsPerPage(Number(e.target.value)); setPage(0); }} />
       </Paper>
+      {assignTarget && (
+        <AssignTicketDialog
+          open={assignDialogOpen}
+          tickets={tickets}
+          execution={assignTarget}
+          onClose={() => { setAssignDialogOpen(false); setAssignTarget(null); }}
+          onAssign={() => loadData()}
+        />
+      )}
+      {viewTicketTarget && (
+        <ViewTicketDialog
+          open={viewTicketOpen}
+          ticket={viewTicketTarget}
+          onClose={() => { setViewTicketOpen(false); setViewTicketTarget(null); }}
+        />
+      )}
     </Box>
   );
 }

@@ -478,6 +478,21 @@ def assign_executions_to_ticket(request):
     })
 
 
+@csrf_exempt
+@require_http_methods(['POST'])
+def unassign_execution(request, execution_id):
+    """Remove the ticket link from a single execution."""
+    try:
+        execution = Execution.objects.get(id=execution_id)
+    except Execution.DoesNotExist:
+        return JsonResponse({'error': 'Execution not found.'}, status=404)
+
+    execution.ticket = None
+    execution.save(update_fields=['ticket'])
+
+    return JsonResponse({'success': True})
+
+
 @require_GET
 def list_testcases(_request):
     """Return every test case currently stored, across all uploaded executions."""
@@ -502,6 +517,7 @@ def list_executions(_request):
             'uploadedAt': execution.uploaded_at.isoformat(),
             'ticketKey': execution.ticket.key if execution.ticket else None,
             'ticketTitle': execution.ticket.title if execution.ticket else None,
+            'ticketId': execution.ticket.id if execution.ticket else None,
             'description': execution.description,
             'testCaseCount': execution.testcases.count(),
             'testcases': [tc.to_row() for tc in execution.testcases.all().order_by('id')],
