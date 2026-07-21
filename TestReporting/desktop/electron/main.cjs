@@ -19,7 +19,6 @@ function createWindow() {
 
     // Load from Django server which serves both React app and static assets
     mainWindow.loadURL('http://127.0.0.1:8000');
-    mainWindow.webContents.openDevTools({ mode: 'detach' });
 }
 
 app.whenReady().then(() => {

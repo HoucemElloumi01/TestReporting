@@ -1338,9 +1338,9 @@ function MainLayout() {
   };
 
   return (
-    <Box sx={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
+    <Box sx={{ display: 'flex', width: '100%', height: '100vh', overflow: 'hidden' }}>
       <Sidebar user={user} selectedTab={selectedTab} onTabChange={setSelectedTab} open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', height: '100vh', ml: sidebarOpen ? `${drawerWidth}px` : 0, transition: 'margin-left 0.25s ease', overflow: 'hidden' }}>
+      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
         <Header user={user} onMenuClick={() => setSidebarOpen(!sidebarOpen)} onLogout={handleLogout} />
         <Box component="main" sx={{ flexGrow: 1, overflow: 'auto', bgcolor: '#f4f7fb', pt: `${headerHeight}px` }}>
           {tabMap[selectedTab]}

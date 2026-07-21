@@ -20,7 +20,7 @@ body {
 }
 
 #root {
-  display: flex;
+  display: block;
 }
 
 /* Tables */
